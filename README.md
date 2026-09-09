@@ -25,157 +25,104 @@ This repository provides useful commands for **FASTA, FASTQ, SAM/BAM, VCF**, and
 
 ---
 
+
 # 🐧 Linux Commands
 
-Common Linux commands useful for navigating and managing bioinformatics projects.
+Common Linux commands useful for bioinformatics projects.
 
-### 1. Check the Current Working Directory
+| # | Task | Command |
+|---|---|---|
+| 1 | Check current directory | `pwd` |
+| 2 | List files with details | `ls -lh` |
+| 3 | Find FASTQ files | `find . -name "*.fastq"` |
+| 4 | Check file sizes | `du -sh *` |
+| 5 | Count lines in a file | `wc -l file.txt` |
+| 6 | Search for text | `grep "pattern" file.txt` |
 
-```bash
-pwd
+📖 **Detailed commands:** [Linux One-Liners →](Linux/linux_one_liners.md)
 
-Displays the current directory.
+---
 
-2. List Files and Directories
-ls -lh
+# 🧬 FASTA Manipulation
 
-Displays files with detailed information.
+Useful commands for inspecting and processing FASTA files.
 
-3. Find FASTQ Files
-find . -name "*.fastq"
+| # | Task | Command |
+|---|---|---|
+| 1 | Count sequences | `grep -c "^>" sequences.fasta` |
+| 2 | Display headers | `grep "^>" sequences.fasta` |
+| 3 | Count total nucleotides | `grep -v "^>" sequences.fasta \| tr -d '\n' \| wc -c` |
 
-Searches recursively for FASTQ files.
+📖 **Detailed commands:** [FASTA One-Liners →](FASTA/fasta_one_liners.md)
 
-4. Check File Sizes
-du -sh *
+---
 
-Useful for checking the size of large sequencing datasets.
+# 📊 FASTQ Processing
 
-➡️ More commands: Linux/linux_one_liners.md
+Useful commands for inspecting sequencing reads.
 
-🧬 FASTA Manipulation
+| # | Task | Command |
+|---|---|---|
+| 1 | View first sequencing read | `head -4 reads.fastq` |
+| 2 | Count sequencing reads | `wc -l reads.fastq \| awk '{print $1/4}'` |
+| 3 | View first 10 reads | `head -40 reads.fastq` |
+| 4 | Extract read identifiers | `awk 'NR%4==1' reads.fastq` |
+| 5 | Calculate average read length | `awk 'NR%4==2 {sum+=length($0); count++} END {print sum/count}' reads.fastq` |
 
-Useful commands for inspecting and processing FASTA sequence files.
+📖 **Detailed commands:** [FASTQ One-Liners →](FASTQ/fastq_one_liners.md)
 
-1. Count Sequences in a FASTA File
-grep -c "^>" sequences.fasta
+---
 
-Counts FASTA sequence headers.
+# 🔬 SAM/BAM Operations
 
-2. Display FASTA Headers
-grep "^>" sequences.fasta
+Useful SAMtools commands for alignment files.
 
-Displays sequence identifiers.
+| # | Task | Command |
+|---|---|---|
+| 1 | View BAM alignments | `samtools view sample.bam \| head` |
+| 2 | View BAM header | `samtools view -H sample.bam` |
+| 3 | Count alignments | `samtools view -c sample.bam` |
+| 4 | Alignment statistics | `samtools flagstat sample.bam` |
+| 5 | Sort BAM file | `samtools sort sample.bam -o sample.sorted.bam` |
+| 6 | Index BAM file | `samtools index sample.sorted.bam` |
+| 7 | Calculate depth | `samtools depth sample.sorted.bam` |
 
-3. Count Total Nucleotides
-grep -v "^>" sequences.fasta | tr -d '\n' | wc -c
+📖 **Detailed commands:** [BAM One-Liners →](BAM/bam_one_liners.md)
 
-Counts nucleotide characters in the FASTA file.
+---
 
-➡️ More commands: FASTA/fasta_one_liners.md
+# 🧪 VCF Variant Analysis
 
-📊 FASTQ Processing
+Useful BCFtools commands for variant analysis.
 
-Commands for inspecting raw sequencing reads.
+| # | Task | Command |
+|---|---|---|
+| 1 | View VCF header | `bcftools view -h variants.vcf` |
+| 2 | Count variants | `bcftools view -H variants.vcf \| wc -l` |
+| 3 | Extract chromosome and position | `bcftools query -f '%CHROM\t%POS\n' variants.vcf` |
+| 4 | Extract PASS variants | `bcftools view -f PASS variants.vcf` |
+| 5 | Count SNPs | `bcftools view -v snps variants.vcf` |
+| 6 | Count INDELs | `bcftools view -v indels variants.vcf` |
 
-1. View the First Sequencing Read
-head -4 reads.fastq
+📖 **Detailed commands:** [VCF One-Liners →](VCF/vcf_one_liners.md)
 
-A FASTQ record contains four lines.
+---
 
-2. Count Sequencing Reads
-wc -l reads.fastq | awk '{print $1/4}'
+# ⚡ AWK, SED and GREP
 
-Calculates the total number of reads.
+Powerful tools for processing bioinformatics data.
 
-3. Calculate Average Read Length
-awk 'NR%4==2 {sum+=length($0); count++} END {print sum/count}' reads.fastq
+| # | Task | Command |
+|---|---|---|
+| 1 | Print first column | `awk '{print $1}' file.txt` |
+| 2 | Filter rows | `awk '$3 > 10' file.txt` |
+| 3 | Calculate sum | `awk '{sum+=$3} END {print sum}' file.txt` |
+| 4 | Calculate average | `awk '{sum+=$3; count++} END {print sum/count}' file.txt` |
+| 5 | Search pattern | `grep "pattern" file.txt` |
+| 6 | Exclude pattern | `grep -v "pattern" file.txt` |
+| 7 | Replace text | `sed 's/old/new/g' file.txt` |
 
-Calculates the average sequencing read length.
-
-➡️ More commands: FASTQ/fastq_one_liners.md
-
-🔬 SAM/BAM Operations
-
-Useful commands for working with alignment files.
-
-1. View BAM Alignments
-samtools view sample.bam | head
-
-Displays the first alignments in a BAM file.
-
-2. Generate Alignment Statistics
-samtools flagstat sample.bam
-
-Provides statistics about mapped and unmapped reads.
-
-3. Sort a BAM File
-samtools sort sample.bam -o sample.sorted.bam
-
-Sorts alignments by genomic coordinates.
-
-4. Index a BAM File
-samtools index sample.sorted.bam
-
-Creates an index for rapid access to genomic regions.
-
-5. Calculate Average Sequencing Depth
-samtools depth sample.sorted.bam | \
-awk '{sum+=$3; count++} END {print sum/count}'
-
-Calculates mean sequencing depth.
-
-➡️ More commands: BAM/bam_one_liners.md
-
-🧪 VCF Variant Analysis
-
-Commands for working with genetic variants.
-
-1. View the VCF Header
-bcftools view -h variants.vcf
-
-Displays metadata and column headers.
-
-2. Count Variants
-bcftools view -H variants.vcf | wc -l
-
-Counts variant records.
-
-3. Extract Chromosome and Position
-bcftools query -f '%CHROM\t%POS\n' variants.vcf
-
-Extracts genomic locations.
-
-4. Extract PASS Variants
-bcftools view -f PASS variants.vcf
-
-Displays variants that passed filtering.
-
-5. Count SNPs
-bcftools view -v snps variants.vcf | \
-grep -v "^#" | wc -l
-
-Counts single nucleotide variants.
-
-➡️ More commands: VCF/vcf_one_liners.md
-
-⚡ AWK, SED and GREP
-
-Powerful text-processing commands commonly used in bioinformatics.
-
-1. Print the First Column
-awk '{print $1}' file.txt
-2. Filter Rows Based on a Value
-awk '$3 > 10' file.txt
-3. Calculate the Average of a Column
-awk '{sum+=$3; count++} END {print sum/count}' file.txt
-4. Search for a Pattern
-grep "pattern" file.txt
-5. Replace Text
-sed 's/old/new/g' file.txt
-
-➡️ More commands: AWK_SED/awk_sed_one_liners.md
-
+📖 **Detailed commands:** [AWK/SED One-Liners →](AWK_SED/awk_sed_one_liners.md)
 🛠️ Tools
 
 This project uses common command-line tools:
