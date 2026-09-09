@@ -134,8 +134,9 @@ GREP
 SAMtools
 BCFtools
 
-📂 Repository Structure
+# 📂 Repository Structure
 
+```text
 Bioinformatics-One-Liners/
 │
 ├── Linux/
