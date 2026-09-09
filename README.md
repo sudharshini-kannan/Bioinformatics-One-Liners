@@ -123,6 +123,8 @@ Powerful tools for processing bioinformatics data.
 | 7 | Replace text | `sed 's/old/new/g' file.txt` |
 
 📖 **Detailed commands:** [AWK/SED One-Liners →](AWK_SED/awk_sed_one_liners.md)
+
+---
 🛠️ Tools
 
 This project uses common command-line tools:
@@ -158,6 +160,8 @@ Bioinformatics-One-Liners/
 │   └── awk_sed_one_liners.md
 │
 └── README.md
+
+---
 
 🎯 Project Goal
 
