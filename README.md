@@ -1,11 +1,8 @@
 # 🧬 Bioinformatics One-Liners & Command-Line Cheatsheet ⚡💻
 
 [![Cheatsheet](https://img.shields.io/badge/Cheatsheet-Bioinformatics-00A86B?style=flat-square)](#-table-of-contents)
-
 [![Linux](https://img.shields.io/badge/CLI-Linux%20%2F%20Bash-0d1117?style=flat-square&logo=linux&logoColor=white)](https://www.gnu.org/software/bash/)
-
 [![Bioinformatics](https://img.shields.io/badge/Field-Bioinformatics-blue?style=flat-square)](https://en.wikipedia.org/wiki/Bioinformatics)
-
 [![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)](https://github.com/sudharshini-kannan/Bioinformatics-One-Liners)
 
 A practical collection of **bioinformatics command-line one-liners** for working with common biological data formats and genomic datasets.
